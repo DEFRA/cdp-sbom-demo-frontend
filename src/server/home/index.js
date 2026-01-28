@@ -1,4 +1,6 @@
 import { homeController } from './controller.js'
+import { depsController } from './deps-controller.js'
+import { usageController } from './usage-controller.js'
 
 /**
  * Sets up the routes used in the home page.
@@ -13,6 +15,16 @@ export const home = {
           method: 'GET',
           path: '/',
           ...homeController
+        },
+        {
+          method: 'GET',
+          path: '/deps',
+          ...depsController
+        },
+        {
+          method: 'GET',
+          path: '/usage',
+          ...usageController
         }
       ])
     }

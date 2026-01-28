@@ -14,12 +14,13 @@
   }) }}
 
       {% call appFilters({
-        action: "/",
+        action: "/deps",
         clear: {
-          url: "/"
+          url: "/deps"
         }
       }) %}
 
+        <input type="hidden" name="csrfToken" value="{{ csrfToken }}"/>
         <div class="app-filters__item">
                 {{ govukSelect({
                 id: "type",
@@ -36,9 +37,9 @@
             label: {
               text: "Dependency Name"
             },
-            id: "name",
-            name: "name",
-            value: query.name
+            id: "partialName",
+            name: "partialName",
+            value: query.partialName
           }) }}
         </div>
 
@@ -53,24 +54,12 @@
             value: query.environment
           }) }}
         </div>
-
         <div class="app-filters__item">
-          {{ govukInput({
-            label: {
-              text: "Version"
-            },
-            id: "version",
-            name: "version",
-            value: query.version
+          {{ govukButton({
+            text: "Search",
+            type: "submit"
           }) }}
         </div>
-
-<div class="app-filters__item">
-        {{ govukButton({
-          text: "Search",
-          type: "submit"
-        }) }}
-</div>
     {% endcall %}
 
 <div class="govuk-grid-row">
@@ -82,10 +71,7 @@
       classes: "govuk-table--small-text-until-tablet",
       head: [
         {
-          text: "Dependency Version"
-        },
-        {
-          text: "Service"
+          text: "Dependency Name"
         }
       ],
       rows: results

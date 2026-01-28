@@ -1,0 +1,42 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set classes = [ "app-filters-form", params.classes if params.classes ] | join(" ") | trim %}
+{% set method = params.method | default("get") %}
+
+<form action="{{ params.action }}" method="{{ method }}" class="{{ classes }}" data-js="app-filters"
+      data-testid="app-filters-form">
+  <fieldset class="govuk-fieldset {%- if params.fieldset.classes %} {{ params.fieldset.classes }}{% endif %}">
+    <div class="app-filters">
+      {{ caller() }}
+
+      <p class="govuk-body-m govuk-!-margin-bottom-0 app-filters__clear-all">
+        <a href="{{ params.clear.url }}"
+           class="govuk-link govuk-link--text-colour"
+           data-testid="app-filters-clear-all"
+           data-clear-all="clearFilters"
+           data-js="app-filters-clear-all">
+          Clear all
+        </a>
+      </p>
+
+      <div class="app-filters__info" data-testid="app-filters-info">
+        {% if params.info.html %}
+          {{ params.info.html | safe }}
+        {% endif %}
+      </div>
+    </div>
+
+    {% for key, value in params.hiddenInputs %}
+      <input type="hidden" name="{{ key }}" value="{{ value }}" data-testid="app-filters-hidden-input-{{ key }}">
+    {% endfor %}
+
+    {{ govukButton({
+      classes: "app-button app-button--secondary js-hidden govuk-!-margin-top-2",
+      text: "Search",
+      attributes: {
+        "data-testid": "app-filters-submit-button",
+        "data-js": "app-no-js-submit-button"
+      }
+    }) }}
+  </fieldset>
+</form>
