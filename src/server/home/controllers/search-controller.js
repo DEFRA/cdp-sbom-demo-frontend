@@ -2,9 +2,9 @@
  * A GDS styled example home page controller.
  * Provided as an example, remove or modify as required.
  */
-import { fetchSearch } from './helpers/fetch-search.js'
-import { fetchTypeFilter } from './helpers/fetch-filters.js'
-import { navigation } from '../common/helpers/navigation.js'
+import { fetchSearch } from '../helpers/fetch-search.js'
+import { fetchTypeFilter } from '../helpers/fetch-filters.js'
+import { navigation } from '../../common/helpers/navigation.js'
 
 const environments = [
   '',
@@ -18,7 +18,7 @@ const environments = [
 
 let typeFilters = null
 
-export const homeController = {
+export const searchController = {
   handler: async (request, h) => {
     if (!typeFilters) {
       typeFilters = await fetchTypeFilter()
@@ -32,7 +32,7 @@ export const homeController = {
     }
 
     console.log(results)
-    return h.view('home/index', {
+    return h.view('home/views/index', {
       pageTitle: 'CDP Dependency Explorer',
       heading: 'Dependency Explorer (demo)',
       environments: environments.map((e) => ({ value: e, text: e })),

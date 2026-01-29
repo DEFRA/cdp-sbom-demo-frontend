@@ -1,6 +1,6 @@
-import { homeController } from './controller.js'
-import { depsController } from './deps-controller.js'
-import { usageController } from './usage-controller.js'
+import { searchController } from './controllers/search-controller.js'
+import { depsController } from './controllers/deps-controller.js'
+import { usageController } from './controllers/usage-controller.js'
 
 /**
  * Sets up the routes used in the home page.
@@ -14,7 +14,7 @@ export const home = {
         {
           method: 'GET',
           path: '/',
-          ...homeController
+          ...searchController
         },
         {
           method: 'GET',
