@@ -118,6 +118,12 @@ export const config = convict({
     default: isProduction,
     env: 'ENABLE_METRICS'
   },
+  cdpSbomExplorerUrl: {
+    doc: 'url of sbom backend',
+    format: String,
+    default: 'http://localhost:3003',
+    env: 'CDP_SBOM_EXPLORER_URL'
+  },
   session: {
     cache: {
       engine: {

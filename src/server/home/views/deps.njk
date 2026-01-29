@@ -1,0 +1,82 @@
+{% extends 'layouts/page.njk' %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "filters/macro.njk" import appFilters %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+      {% call appFilters({
+        action: "/deps",
+        clear: {
+          url: "/deps"
+        }
+      }) %}
+
+        <input type="hidden" name="csrfToken" value="{{ csrfToken }}"/>
+        <div class="app-filters__item">
+                {{ govukSelect({
+                id: "type",
+                name: "type",
+                label: {
+                  text: "Type"
+                },
+                items: typeFilters,
+                value: query.type
+              }) }}
+        </div>
+        <div class="app-filters__item">
+          {{ govukInput({
+            label: {
+              text: "Dependency Name"
+            },
+            id: "partialName",
+            name: "partialName",
+            value: query.partialName
+          }) }}
+        </div>
+
+        <div class="app-filters__item">
+          {{ govukSelect({
+            id: "environment",
+            name: "environment",
+            label: {
+              text: "Environment"
+            },
+            items: environments,
+            value: query.environment
+          }) }}
+        </div>
+        <div class="app-filters__item">
+          {{ govukButton({
+            text: "Search",
+            type: "submit"
+          }) }}
+        </div>
+    {% endcall %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ govukTable({
+      caption: "Dependencies",
+      captionClasses: "govuk-table__caption--m",
+      firstCellIsHeader: false,
+      classes: "govuk-table--small-text-until-tablet",
+      head: [
+        {
+          text: "Dependency Name"
+        }
+      ],
+      rows: results
+      })
+    }}
+  </div>
+</div>
+
+{% endblock %}
