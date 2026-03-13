@@ -1,6 +1,7 @@
 import { glob } from 'glob'
 import { posix, parse, resolve } from 'node:path'
 
+// TODO: Lift up to Libraries project
 export default {
   name: 'appRouter',
   version: '0.0.1',
