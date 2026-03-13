@@ -15,6 +15,8 @@ import { getCacheEngine } from './common/helpers/session-cache/cache-engine.js'
 import { secureContext } from '@defra/hapi-secure-context'
 import { contentSecurityPolicy } from './common/helpers/content-security-policy.js'
 import appRouter from './appRouter.js'
+import inert from '@hapi/inert'
+import { serveStaticFiles } from './common/helpers/serve-static-files.js'
 
 export async function createServer() {
   setupProxy()
@@ -63,11 +65,13 @@ export async function createServer() {
     nunjucksConfig,
     Scooter,
     contentSecurityPolicy,
+    inert,
     router,
     {
       plugin: appRouter,
       options: { path: 'src/server/routes', templatesPath: 'src/server' }
-    }
+    },
+    serveStaticFiles
   ])
 
   server.ext('onPreResponse', catchAll)
