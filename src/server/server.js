@@ -2,7 +2,6 @@ import path from 'path'
 import hapi from '@hapi/hapi'
 import Scooter from '@hapi/scooter'
 
-import { router } from './router.js'
 import { config } from '../config/config.js'
 import { pulse } from './common/helpers/pulse.js'
 import { catchAll } from './common/helpers/errors.js'
@@ -66,7 +65,6 @@ export async function createServer() {
     Scooter,
     contentSecurityPolicy,
     inert,
-    router,
     {
       plugin: appRouter,
       options: { path: 'src/server/routes', templatesPath: 'src/server' }
