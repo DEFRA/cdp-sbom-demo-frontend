@@ -1,5 +1,5 @@
-import { fetchSearch } from '#server/home/helpers/fetch-search.js'
-import { fetchTypeFilter } from '#server/home/helpers/fetch-filters.js'
+import { fetchSearch } from '#server/services/SearchService.js'
+import { fetchTypeFilter } from '#server/services/FilterService.js'
 import { navigation } from '#server/common/helpers/navigation.js'
 
 const environments = [

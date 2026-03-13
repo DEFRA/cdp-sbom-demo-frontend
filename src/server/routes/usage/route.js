@@ -1,7 +1,7 @@
-import { fetchTypeFilter } from '#server/home/helpers/fetch-filters.js'
+import { fetchTypeFilter } from '#server/services/FilterService.js'
 import { navigation } from '#server/common/helpers/navigation.js'
 import { environments } from '#server/common/constants/environments.js'
-import { fetchUsage } from '#server/home/helpers/fetch-search.js'
+import { fetchUsage } from '#server/services/SearchService.js'
 
 let typeFilters = null
 
