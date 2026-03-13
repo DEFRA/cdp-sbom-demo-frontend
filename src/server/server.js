@@ -14,6 +14,7 @@ import { sessionCache } from './common/helpers/session-cache/session-cache.js'
 import { getCacheEngine } from './common/helpers/session-cache/cache-engine.js'
 import { secureContext } from '@defra/hapi-secure-context'
 import { contentSecurityPolicy } from './common/helpers/content-security-policy.js'
+import appRouter from './appRouter.js'
 
 export async function createServer() {
   setupProxy()
@@ -62,7 +63,11 @@ export async function createServer() {
     nunjucksConfig,
     Scooter,
     contentSecurityPolicy,
-    router // Register all the controllers/routes defined in src/server/router.js
+    router,
+    {
+      plugin: appRouter,
+      options: { path: 'src/server/routes', templatesPath: 'src/server' }
+    }
   ])
 
   server.ext('onPreResponse', catchAll)

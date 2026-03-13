@@ -22,8 +22,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:scss": "stylelint \"src/**/*.scss\" --cache --cache-location .cache/stylelint --cache-strategy content --color --ignore-path .gitignore",
     "pretest": "npm run build:client",
-    "test": "TZ=UTC vitest run --coverage",
-    "test:watch": "TZ=UTC vitest",
+    "test": "TZ=UTC vitest --coverage",
     "security-audit": "npm audit --audit-level=high",
     "server:debug": "node --env-file-if-exists=.env --watch-path=./src --inspect ./src",
     "server:watch": "node --env-file-if-exists=.env --watch-path=./src ./src",
@@ -33,6 +32,10 @@
   },
   "author": "Defra DDTS",
   "license": "OGL-UK-3.0",
+  "imports": {
+    "#server/*": "./src/server/*",
+    "#config/*": "./src/config/*"
+  },
   "dependencies": {
     "@defra/cdp-auditing": "0.6.0",
     "@defra/hapi-secure-context": "0.4.0",
@@ -52,6 +55,7 @@
     "cssnano": "7.1.2",
     "cssnano-preset-default": "7.0.10",
     "date-fns": "4.1.0",
+    "glob": "13.0.6",
     "global-agent": "3.0.0",
     "govuk-frontend": "5.13.0",
     "hapi-pino": "13.0.0",
