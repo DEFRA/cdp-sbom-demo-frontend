@@ -12,54 +12,6 @@ export default {
     for (const sourcePath of sourcePaths) {
       await registerPage(path, templatesPath, sourcePath, server)
     }
-
-    await server.register(
-      {
-        name: '/sub',
-        register: async function (pluginServer) {
-          pluginServer.ext([
-            {
-              type: 'onPreAuth',
-              method: (request, h) => {
-                request.app.name = 'Routerz'
-                return h.continue
-              },
-              options: {
-                sandbox: 'plugin'
-              }
-            }
-          ])
-
-          pluginServer.route({
-            method: 'GET',
-            path: '/',
-            handler: async (request, h) => {
-              return 'Hello /sub' + request.app.name
-            }
-          })
-
-          await pluginServer.register(
-            {
-              name: '/sub/sub',
-              register: async function (subPluginServer) {
-                subPluginServer.ext([])
-
-                subPluginServer.route({
-                  method: 'GET',
-                  path: '/',
-                  handler: async (request, h) => {
-                    console.log(subPluginServer.realm.parent._extensions)
-                    return 'Hello /sub/sub' + request.app.name
-                  }
-                })
-              }
-            },
-            { routes: { prefix: '/sub' } }
-          )
-        }
-      },
-      { routes: { prefix: '/sub' } }
-    )
   }
 }
 

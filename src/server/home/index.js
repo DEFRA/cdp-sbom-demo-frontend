@@ -1,6 +1,4 @@
-import { searchController } from './controllers/search-controller.js'
 import { depsController } from './controllers/deps-controller.js'
-import { usageController } from './controllers/usage-controller.js'
 
 /**
  * Sets up the routes used in the home page.
@@ -13,18 +11,8 @@ export const home = {
       server.route([
         {
           method: 'GET',
-          path: '/',
-          ...searchController
-        },
-        {
-          method: 'GET',
           path: '/deps',
           ...depsController
-        },
-        {
-          method: 'GET',
-          path: '/usage',
-          ...usageController
         }
       ])
     }
