@@ -31,7 +31,6 @@ export const searchController = {
       results = await fetchSearch(request.query)
     }
 
-    console.log(results)
     return h.view('home/views/index', {
       pageTitle: 'CDP Dependency Explorer',
       heading: 'Dependency Explorer (demo)',
