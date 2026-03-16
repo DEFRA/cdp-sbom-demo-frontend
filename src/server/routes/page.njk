@@ -5,7 +5,12 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
+
 {% from "filters/macro.njk" import appFilters %}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+
+{% from "icons/search-icon/macro.njk" import appSearchIcon %}
+{% from "icons/tick-icon/macro.njk" import appTickIcon %}
 
 {% block content %}
   {{ appHeading({
@@ -38,6 +43,25 @@
             id: "name",
             name: "name",
             value: query.name
+          }) }}
+        </div>
+
+        <div class="app-filters__item">
+          {{ appAutocomplete({
+            id: "namee",
+            name: "name",
+            classes: "app-autocomplete--medium app-autocomplete--inline",
+            label: {
+              text: "Dependency Name"
+            },
+            icon: appSearchIcon(),
+            formGroup: {
+              classes: "app-form-group--inline"
+            },
+            value: query.name,
+            suggestions: typeFilters,
+            typeahead: true,
+            placeholder: "Search for dependency"
           }) }}
         </div>
 
