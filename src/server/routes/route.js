@@ -20,7 +20,6 @@ export default async function (request) {
 
   let results = []
 
-  request.logger.info(request.query)
   if (request.query?.type && request.query?.name) {
     results = await fetchSearch(request.query)
   }

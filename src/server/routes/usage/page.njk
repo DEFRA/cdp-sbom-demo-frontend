@@ -5,7 +5,12 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
+
 {% from "filters/macro.njk" import appFilters %}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+
+{% from "icons/search-icon/macro.njk" import appSearchIcon %}
+{% from "icons/tick-icon/macro.njk" import appTickIcon %}
 
 {% block content %}
   {{ appHeading({
@@ -19,7 +24,6 @@
         }
       }) %}
 
-        <input type="hidden" name="csrfToken" value="{{ csrfToken }}"/>
         <div class="app-filters__item">
                 {{ govukSelect({
                 id: "type",
@@ -31,14 +35,29 @@
                 value: query.type
               }) }}
         </div>
+
         <div class="app-filters__item">
-          {{ govukInput({
+          {{ appAutocomplete({
+            id: "name",
+            name: "name",
+            classes: "app-autocomplete--medium app-autocomplete--inline",
             label: {
               text: "Dependency Name"
             },
-            id: "partialName",
-            name: "partialName",
-            value: query.partialName
+            icon: appSearchIcon(),
+            formGroup: {
+              classes: "app-form-group--inline"
+            },
+            value: query.name,
+            dataFetcher: {
+              name: "searchDependencyName",
+              loader: "search-dependency-loader"
+            },
+            loader: {
+              name: "search-dependency-loader"
+            },
+            typeahead: true,
+            placeholder: "Search for dependency"
           }) }}
         </div>
 

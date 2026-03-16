@@ -11,7 +11,6 @@ export default async function (request) {
 
   let results = []
 
-  request.logger.info(request.query)
   if (request.query?.type) {
     results = await fetchUsage(request.query)
   }

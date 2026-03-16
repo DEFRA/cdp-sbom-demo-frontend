@@ -52,8 +52,8 @@ export async function fetchUsage(query) {
     searchUrl.searchParams.set('type', query.type)
   }
 
-  if (query.partialName) {
-    searchUrl.searchParams.set('partialName', query.partialName)
+  if (query.name) {
+    searchUrl.searchParams.set('partialName', query.name)
   }
 
   if (query.environment) {
