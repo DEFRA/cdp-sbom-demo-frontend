@@ -26,7 +26,7 @@ export default async function (request) {
 
   return {
     pageTitle: 'CDP Dependency Explorer',
-    heading: 'Dependency Explorer (demo)',
+    heading: 'Search dependencies',
     environments: environments.map((e) => ({ value: e, text: e })),
     query: { type: 'npm', ...request.query },
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),

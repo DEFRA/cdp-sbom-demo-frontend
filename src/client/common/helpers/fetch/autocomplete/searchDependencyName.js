@@ -1,6 +1,7 @@
 export default async function searchDependencyName(value) {
+  const type = document.querySelector('select#type').value
   const response = await fetch(
-    `${location.origin}/deps-search?type=npm&partialName=${value}`,
+    `${location.origin}/deps-search?type=${type}&partialName=${value}`,
     {
       headers: { 'X-Requested-With': 'XMLHttpRequest' }
     }
