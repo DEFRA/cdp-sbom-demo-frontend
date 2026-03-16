@@ -12,6 +12,7 @@ import { filters } from '../../server/common/components/filters/filters.js'
 import { Autocomplete } from '../../server/common/components/autocomplete/autocomplete.js'
 import { AutocompleteAdvanced } from '../../server/common/components/autocomplete/autocomplete-advanced.js'
 import { AutocompleteSearch } from '../../server/common/components/autocomplete/autocomplete-search.js'
+import searchDependencyName from '../common/helpers/fetch/autocomplete/searchDependencyName.js'
 
 createAll(Button)
 createAll(Checkboxes)
@@ -22,6 +23,8 @@ createAll(SkipLink)
 
 // ClientSide CDP namespace
 window.cdp = window.cdp || {}
+
+window.cdp.searchDependencyName = searchDependencyName
 
 // Filters
 initModules('app-filters', filters)
