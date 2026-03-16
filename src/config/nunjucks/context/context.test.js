@@ -51,16 +51,21 @@ describe('context and cache', () => {
           navigation: [
             {
               current: true,
-              text: 'Home',
+              text: 'Search',
               href: '/'
             },
             {
               current: false,
-              text: 'About',
-              href: '/about'
+              href: '/deps',
+              text: 'Dependency Lookup'
+            },
+            {
+              current: false,
+              href: '/usage',
+              text: 'Usage'
             }
           ],
-          serviceName: 'cdp-sbom-demo-frontend',
+          serviceName: 'Dependency Explorer (demo)',
           serviceUrl: '/'
         })
       })
@@ -140,16 +145,21 @@ describe('context and cache', () => {
           navigation: [
             {
               current: true,
-              text: 'Home',
+              text: 'Search',
               href: '/'
             },
             {
               current: false,
-              text: 'About',
-              href: '/about'
+              href: '/deps',
+              text: 'Dependency Lookup'
+            },
+            {
+              current: false,
+              href: '/usage',
+              text: 'Usage'
             }
           ],
-          serviceName: 'cdp-sbom-demo-frontend',
+          serviceName: 'Dependency Explorer (demo)',
           serviceUrl: '/'
         })
       })

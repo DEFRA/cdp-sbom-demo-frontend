@@ -2,7 +2,6 @@ import {
   fetchTypeFilter,
   fetchUniqueDependencies
 } from '#server/services/FilterService.js'
-import { navigation } from '#server/common/helpers/navigation.js'
 import { environments } from '#server/common/constants/environments.js'
 
 let typeFilters = null
@@ -29,7 +28,6 @@ export default async function (request) {
       {
         html: `<a href='/usage?type=${request.query.type}&partialName=${r.name}&environment=${request.query.environment}'>${r.name}</a>`
       }
-    ]),
-    navigation
+    ])
   }
 }

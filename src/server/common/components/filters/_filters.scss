@@ -1,6 +1,6 @@
-@use "govuk-frontend" as *;
-@use "variables/colours" as *;
-@use "variables/border-radius" as *;
+@use 'govuk-frontend' as *;
+@use 'variables/colours' as *;
+@use 'variables/border-radius' as *;
 
 .app-filters__heading {
   display: flex;
@@ -41,6 +41,6 @@
 
 .app-filters__clear-all {
   flex: 4em;
-  align-self: flex-end;
+  align-self: center;
   padding-bottom: govuk-spacing(2);
 }

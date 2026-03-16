@@ -1,6 +1,5 @@
 import { fetchSearch } from '#server/services/SearchService.js'
 import { fetchTypeFilter } from '#server/services/FilterService.js'
-import { navigation } from '#server/common/helpers/navigation.js'
 
 const environments = [
   '',
@@ -35,7 +34,6 @@ export default async function (request) {
     results: results.map((r) => [
       { text: r.depversion },
       { html: `<strong>${r.name}</strong>  (${r.version})` }
-    ]),
-    navigation
+    ])
   }
 }

@@ -1,5 +1,4 @@
 import { fetchTypeFilter } from '#server/services/FilterService.js'
-import { navigation } from '#server/common/helpers/navigation.js'
 import { environments } from '#server/common/constants/environments.js'
 import { fetchUsage } from '#server/services/SearchService.js'
 
@@ -27,7 +26,6 @@ export default async function (request) {
       { text: r.name },
       { text: r.version },
       { text: r.count }
-    ]),
-    navigation
+    ])
   }
 }
