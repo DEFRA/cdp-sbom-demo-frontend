@@ -23,10 +23,11 @@ export default async function (request) {
   if (request.query?.type && request.query?.name) {
     results = await fetchSearch(request.query)
   }
-
+  console.log(results)
   return {
-    pageTitle: 'CDP Dependency Explorer',
-    heading: 'Search dependencies',
+    pageTitle: 'CDP Dependency Explorer - Search',
+    heading: 'Search',
+    caption: 'Search for dependencies used by services',
     environments: environments.map((e) => ({ value: e, text: e })),
     query: { type: 'npm', ...request.query },
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
