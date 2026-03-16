@@ -16,11 +16,6 @@ describe('#buildNavigation', () => {
       },
       {
         current: false,
-        href: '/deps',
-        text: 'Dependency Lookup'
-      },
-      {
-        current: false,
         href: '/usage',
         text: 'Usage'
       }
@@ -33,11 +28,6 @@ describe('#buildNavigation', () => {
         current: true,
         text: 'Search',
         href: '/'
-      },
-      {
-        current: false,
-        href: '/deps',
-        text: 'Dependency Lookup'
       },
       {
         current: false,

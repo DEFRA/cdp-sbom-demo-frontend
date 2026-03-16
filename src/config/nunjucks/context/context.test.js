@@ -56,11 +56,6 @@ describe('context and cache', () => {
             },
             {
               current: false,
-              href: '/deps',
-              text: 'Dependency Lookup'
-            },
-            {
-              current: false,
               href: '/usage',
               text: 'Usage'
             }
@@ -147,11 +142,6 @@ describe('context and cache', () => {
               current: true,
               text: 'Search',
               href: '/'
-            },
-            {
-              current: false,
-              href: '/deps',
-              text: 'Dependency Lookup'
             },
             {
               current: false,
