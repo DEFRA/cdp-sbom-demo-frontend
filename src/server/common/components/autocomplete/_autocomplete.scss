@@ -1,0 +1,273 @@
+@use 'govuk-frontend' as *;
+@use 'variables/colours' as *;
+@use 'variables/border-radius' as *;
+
+$tiny-width: 12em;
+$small-width: 24em;
+$width: 30em;
+$large-width: 40em;
+
+.app-autocomplete {
+  position: relative;
+  width: $small-width;
+  margin-bottom: govuk-spacing(4);
+}
+
+.app-autocomplete--tiny {
+  width: $tiny-width;
+
+  .app-autocomplete__suggestions {
+    width: calc(100% - 4px);
+  }
+}
+
+.app-autocomplete--small {
+  width: $small-width;
+
+  .app-autocomplete__suggestions {
+    width: calc(100% - 4px);
+  }
+}
+
+.app-autocomplete--wide {
+  width: $large-width;
+
+  .app-autocomplete__suggestions {
+    width: calc(100% - 4px);
+  }
+}
+
+.app-autocomplete--inline {
+  margin-bottom: 0;
+}
+
+.app-autocomplete--with-icon {
+  .app-autocomplete__control {
+    > .app-icon {
+      position: absolute;
+      left: -2px;
+      fill: govuk-colour('mid-grey');
+      width: 26px;
+      height: 26px;
+    }
+
+    .app-autocomplete__input {
+      padding: govuk-spacing(1) govuk-spacing(6);
+    }
+  }
+
+  .app-input,
+  .app-select {
+    padding-left: govuk-spacing(6);
+  }
+}
+
+.app-autocomplete--search {
+  position: relative;
+  width: $large-width;
+
+  .app-autocomplete__suggestion {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+
+    .app-suggestion__value {
+      justify-content: flex-start;
+    }
+
+    .app-suggestion__context {
+      color: govuk-colour('mid-grey');
+      @include govuk-font(16);
+    }
+
+    &:focus,
+    &:hover {
+      .app-suggestion__context {
+        color: govuk-colour('white');
+      }
+    }
+  }
+
+  .app-autocomplete__suggestion--no-results {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.app-autocomplete__control {
+  display: flex;
+  align-items: center;
+
+  & .app-loader {
+    position: absolute;
+    right: -20px;
+    bottom: 8px;
+  }
+}
+
+.app-autocomplete__chevron-button {
+  margin: 0 govuk-spacing(1) 0 0;
+  padding: 0;
+  position: absolute;
+  display: none;
+  top: 8px;
+  right: -12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transform: rotate(0);
+
+  & .app-chevron-icon {
+    fill: govuk-colour('mid-grey');
+    width: 18px;
+    height: 18px;
+  }
+
+  &--open {
+    top: 4px;
+    transform: rotate(180deg);
+  }
+}
+
+.app-autocomplete__clear-button {
+  margin: 0 govuk-spacing(1) 0 0;
+  padding: 0;
+  position: absolute;
+  display: none;
+  top: 8px;
+  right: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.app-autocomplete__clear-button--show {
+  display: block;
+}
+
+.app-autocomplete__input {
+  padding: govuk-spacing(1) govuk-spacing(6) govuk-spacing(1) govuk-spacing(1);
+  border-radius: $app-border-radius-min;
+
+  &:focus {
+    border: 2px solid govuk-colour('black');
+    box-shadow: none;
+  }
+
+  &::placeholder {
+    color: govuk-colour('dark-grey');
+  }
+}
+
+.app-autocomplete__suggestions {
+  @include govuk-font(19);
+  z-index: 500;
+  position: absolute;
+  left: 0;
+  background-color: govuk-colour('white');
+  border-radius: 0 0 $app-border-radius $app-border-radius;
+  border: 1px solid $app-brand-border-colour-light;
+  box-shadow: 3px 5px 4px -4px govuk-colour('mid-grey');
+  list-style: none;
+  padding: govuk-spacing(1) 0;
+  margin: 0;
+  max-height: govuk-spacing(9) * 4;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: none;
+  width: calc(100% - 4px);
+}
+
+.app-autocomplete__suggestions--large {
+  max-height: govuk-spacing(9) * 8;
+}
+
+.app-autocomplete__suggestions--show {
+  display: block;
+}
+
+.app-autocomplete__suggestion {
+  margin: 0;
+  padding: govuk-spacing(1) govuk-spacing(2);
+  display: flex;
+  align-items: center;
+  color: govuk-colour('black');
+  list-style-type: none;
+
+  &:nth-child(even) {
+    background-color: $app-brand-background-colour-light;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: govuk-tint(govuk-colour('blue'), 30%);
+    color: govuk-colour('white');
+
+    .app-suggestion__action {
+      & .app-tick-icon {
+        fill: govuk-colour('white');
+      }
+    }
+  }
+
+  .app-suggestion__value {
+    order: 1;
+    flex: 1.4;
+    justify-content: flex-start;
+  }
+
+  .app-suggestion__hint {
+    order: 2;
+    flex: 3;
+    justify-content: flex-start;
+  }
+
+  .app-suggestion__action {
+    order: 3;
+    flex: 0 0 20px;
+    align-self: flex-end;
+    width: 20px;
+    height: 20px;
+  }
+
+  &.app-autocomplete__suggestion--highlight {
+    background-color: govuk-tint(govuk-colour('blue'), 30%);
+    color: govuk-colour('white');
+
+    .app-tick-icon {
+      fill: govuk-colour('white');
+    }
+
+    .app-suggestion__context {
+      color: govuk-colour('white');
+    }
+  }
+}
+
+.app-autocomplete__suggestion--leading-hint {
+  .app-suggestion__value {
+    order: 2;
+    flex: 3;
+  }
+
+  .app-suggestion__hint {
+    order: 1;
+    flex: 1.4;
+  }
+
+  .app-suggestion__action {
+    order: 3;
+    flex: 0;
+  }
+}
+
+.app-autocomplete__suggestion--no-results {
+  color: govuk-colour('dark-grey');
+}
+
+.govuk-form-group--error {
+  .app-autocomplete__input {
+    border-color: govuk-colour('red');
+  }
+}

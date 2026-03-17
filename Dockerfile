@@ -1,4 +1,4 @@
-ARG PARENT_VERSION=2.10.1-node24.11.1
+ARG PARENT_VERSION=2.10.3-node24.12.0
 ARG PORT=3000
 ARG PORT_DEBUG=9229
 
@@ -16,7 +16,7 @@ EXPOSE ${PORT} ${PORT_DEBUG}
 COPY --chown=node:node --chmod=755 package*.json ./
 RUN npm install
 COPY --chown=node:node --chmod=755 . .
-RUN npm run build:frontend
+RUN npm run build:client
 
 CMD [ "npm", "run", "docker:dev" ]
 
@@ -24,7 +24,7 @@ FROM development AS production_build
 
 ENV NODE_ENV=production
 
-RUN npm run build:frontend
+RUN npm run build:client
 
 FROM defradigital/node:${PARENT_VERSION} AS production
 ARG PARENT_VERSION
