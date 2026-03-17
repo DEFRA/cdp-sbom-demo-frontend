@@ -8,17 +8,17 @@ export function buildNavigation(request) {
     {
       href: '/dependency',
       text: 'Dependency',
-      current: request?.path === '/dependency'
+      current: request?.path.startsWith('/dependency')
     },
     {
       href: '/service',
       text: 'Service',
-      current: request?.path === '/service'
+      current: request?.path.startsWith('/service')
     },
     {
       href: '/vulnerability',
       text: 'Vulnerability',
-      current: request?.path === '/vulnerability'
+      current: request?.path.startsWith('/vulnerability')
     }
   ]
 }

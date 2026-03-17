@@ -11,7 +11,7 @@ export default async function (request) {
 
   let results = []
 
-  if (request.query?.type) {
+  if (request.query?.type && request.query?.dependency) {
     results = await fetchUsage(request.query)
   }
 

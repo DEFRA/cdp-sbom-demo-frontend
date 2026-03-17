@@ -20,18 +20,19 @@ export default async function (request) {
 
   let results = []
 
-  if (request.query?.type && request.query?.name) {
+  if (request.query?.type && request.query?.dependency) {
     results = await fetchSearch(request.query)
   }
 
   return {
     pageTitle: 'CDP Dependency Explorer - Dependency - Services',
     environments: environments.map((e) => ({ value: e, text: e })),
-    query: { type: 'npm', ...request.query },
+    query: { type: 'npm', environment: 'latest', ...request.query },
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
       { text: r.depversion },
-      { html: `<strong>${r.name}</strong>  (${r.version})` }
+      { html: `<strong>${r.name}</strong>  (${r.version})` },
+      { text: '' }
     ])
   }
 }
