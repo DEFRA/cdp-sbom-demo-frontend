@@ -1,16 +1,4 @@
 {% extends 'layouts/page.njk' %}
-{% from "govuk/components/select/macro.njk" import govukSelect %}
-{% from "govuk/components/table/macro.njk" import govukTable %}
-{% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "govuk/components/input/macro.njk" import govukInput %}
-{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
-{% from "govuk/components/input/macro.njk" import govukInput %}
-
-{% from "filters/macro.njk" import appFilters %}
-{% from "autocomplete/macro.njk" import appAutocomplete %}
-
-{% from "icons/search-icon/macro.njk" import appSearchIcon %}
-{% from "icons/tick-icon/macro.njk" import appTickIcon %}
 
 {% block content %}
   {{ appHeading({
@@ -18,94 +6,10 @@
     caption: caption
   }) }}
 
-      {% call appFilters({
-        action: "/",
-        clear: {
-          url: "/"
-        }
-      }) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-        <div class="app-filters__item">
-          {{ govukSelect({
-            id: "type",
-            name: "type",
-            label: {
-              text: "Type"
-            },
-            items: typeFilters,
-            value: query.type
-          }) }}
-        </div>
-
-        <div class="app-filters__item">
-          {{ appAutocomplete({
-            id: "name",
-            name: "name",
-            classes: "app-autocomplete--medium app-autocomplete--inline",
-            label: {
-              text: "Dependency Name"
-            },
-            icon: appSearchIcon(),
-            formGroup: {
-              classes: "app-form-group--inline"
-            },
-            value: query.name,
-            dataFetcher: {
-              name: "searchDependencyName",
-              loader: "search-dependency-loader"
-            },
-            loader: {
-              name: "search-dependency-loader"
-            },
-            typeahead: true,
-            placeholder: "Search for dependency"
-          }) }}
-        </div>
-
-        <div class="app-filters__item">
-          {{ govukSelect({
-            id: "environment",
-            name: "environment",
-            label: {
-              text: "Environment"
-            },
-            items: environments,
-            value: query.environment
-          }) }}
-        </div>
-
-        <div class="app-filters__item">
-          {{ govukInput({
-            label: {
-              text: "Version"
-            },
-            id: "version",
-            name: "version",
-            value: query.version
-          }) }}
-        </div>
-
-    {% endcall %}
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    {{ govukTable({
-      caption: "Dependencies",
-      captionClasses: "govuk-table__caption--m",
-      firstCellIsHeader: false,
-      classes: "govuk-table--small-text-until-tablet",
-      head: [
-        {
-          text: "Dependency Version"
-        },
-        {
-          text: "Service (version)"
-        }
-      ],
-      rows: results
-      })
-    }}
+    </div>
   </div>
-</div>
 
 {% endblock %}

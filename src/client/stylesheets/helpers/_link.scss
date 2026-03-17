@@ -1,0 +1,47 @@
+@use "govuk-frontend" as *;
+
+@mixin app-link {
+  @include govuk-link-style-no-visited-state;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+@mixin app-link-underline {
+  @include govuk-link-style-no-visited-state;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+@mixin app-link-without-underline {
+  @include govuk-link-style-no-visited-state;
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}

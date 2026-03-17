@@ -1,0 +1,45 @@
+{% set activeTabId = "" %}
+{% set classes = ["app-tabs"] | join(" ") | trim %}
+
+{% if(params.displayTabs | default("true") and params.tabs | length) %}
+  <div class="{{ classes }}" data-js="app-tabs">
+    <ul class="app-tabs__list" data-testid="app-tabs-list" role="tablist" aria-label="{{ params.label }}">
+      {% for tab in params.tabs %}
+
+        {% set tabId =  tab.label | lower | kebabCase %}
+
+        <li class="app-tabs__list-item{% if tab.isActive %} app-tabs__list-item--selected{% endif %}"
+            data-testid="app-tabs-list-item-{{ tabId }}{% if tab.isActive %} app-tabs-list-item--selected{% endif %}">
+
+          {% if tab.isActive %}
+            {% set activeTabId = tabId %}
+          {% endif %}
+
+          <a id="tab-{{ tabId }}"
+             class="app-tabs__tab"
+             href="{{ tab.url }}"
+             data-js="app-tab"
+             role="tab"
+             aria-controls="tab-panel-{{ tabId }}"
+             aria-selected="{{ tab.isActive }}"
+             data-testid="app-tabs-list-item__anchor-{{ tabId }}">
+            {{ tab.label }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% for tab in params.tabs %}
+  {% if tab.isActive %}
+    {% set content = tab.panel.html | safe if tab.panel.html else tab.panel.text %}
+    <section id="tab-panel-{{ activeTabId }}"
+             class="app-tabs__panel"
+             role="tabpanel"
+             aria-labelledby="tab-{{ activeTabId }}"
+             data-testid="app-tabs-panel">
+      {{ caller() if caller else content }}
+    </section>
+  {% endif %}
+{% endfor %}
