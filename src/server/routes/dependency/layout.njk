@@ -1,0 +1,102 @@
+{% extends 'layouts/page.njk' %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% from "filters/macro.njk" import appFilters %}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+{% from "tabs/macro.njk" import appTabs %}
+
+{% from "icons/search-icon/macro.njk" import appSearchIcon %}
+{% from "icons/tick-icon/macro.njk" import appTickIcon %}
+
+{% block content %}
+  {{ appHeading({
+    text: 'Dependency',
+    caption: 'Browse by dependency'
+  }) }}
+
+      {% call appFilters({
+        action: "/dependency",
+        clear: {
+          url: "/dependency"
+        }
+      }) %}
+
+        <div class="app-filters__item">
+          {{ govukSelect({
+            id: "type",
+            name: "type",
+            label: {
+              text: "Type"
+            },
+            items: typeFilters,
+            value: query.type
+          }) }}
+        </div>
+
+        <div class="app-filters__item">
+          {{ appAutocomplete({
+            id: "dependency",
+            name: "dependency",
+            classes: "app-autocomplete--medium app-autocomplete--inline",
+            label: {
+              text: "Dependency Name"
+            },
+            icon: appSearchIcon(),
+            formGroup: {
+              classes: "app-form-group--inline"
+            },
+            value: query.dependency,
+            dataFetcher: {
+              name: "searchDependencyName",
+              loader: "search-dependency-loader"
+            },
+            loader: {
+              name: "search-dependency-loader"
+            },
+            typeahead: true,
+            placeholder: "Search for dependency"
+          }) }}
+        </div>
+
+        <div class="app-filters__item">
+          {{ govukSelect({
+            id: "environment",
+            name: "environment",
+            label: {
+              text: "Environment"
+            },
+            items: environments,
+            value: query.environment
+          }) }}
+        </div>
+
+        <div class="app-filters__item">
+          {{ govukInput({
+            label: {
+              text: "Version"
+            },
+            id: "version",
+            name: "version",
+            value: query.version
+          }) }}
+        </div>
+
+    {% endcall %}
+
+    {% call appTabs({
+      label: "Service views",
+      tabs: [
+        { label: "Versions", url: "/dependency", isActive: true },
+        { label: "Services", url: "/dependency/services" },
+        { label: "Vulnerabilities", url: "/dependency/vulnerabilities" }
+      ]
+    }) %}
+    {% endcall %}
+
+  {% block pageContent %}{% endblock %}
+
+{% endblock %}

@@ -8,8 +8,8 @@ export async function fetchSearch(query) {
     searchUrl.searchParams.set('type', query.type)
   }
 
-  if (query.name) {
-    searchUrl.searchParams.set('name', query.name)
+  if (query.dependency) {
+    searchUrl.searchParams.set('name', query.dependency)
   }
 
   if (query.environment) {
@@ -52,8 +52,8 @@ export async function fetchUsage(query) {
     searchUrl.searchParams.set('type', query.type)
   }
 
-  if (query.name) {
-    searchUrl.searchParams.set('partialName', query.name)
+  if (query.dependency) {
+    searchUrl.searchParams.set('partialName', query.dependency)
   }
 
   if (query.environment) {
