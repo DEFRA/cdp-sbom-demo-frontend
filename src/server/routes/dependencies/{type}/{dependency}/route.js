@@ -1,13 +1,14 @@
-import { fetchTypeFilter } from '#server/services/FilterService.js'
 import { environments } from '#server/common/constants/environments.js'
 import { fetchUsage } from '#server/services/SearchService.js'
 
 export default async function (request) {
-  const typeFilters = await fetchTypeFilter()
+  const type = request.params.type
+  const dependency = request.params.dependency
 
   const results = await fetchUsage({
-    type: 'npm',
-    dependency: request.params.dependency,
+    type,
+    dependency,
+    environment: 'prod',
     ...request.query
   })
 
@@ -15,14 +16,15 @@ export default async function (request) {
     pageTitle: 'CDP Dependency Explorer - Dependency',
     environments: environments.map((e) => ({ value: e, text: e })),
     query: { environment: 'prod', ...request.query },
+    type,
+    dependency,
     path: request.path,
-    typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
       {
-        html: `<a href="/dependency/?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
+        html: `<a href="/dependencies/${type}/${dependency}?environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
       },
       {
-        html: `<a href="/dependency/services?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
+        html: `<a href="/dependency/${type}/${dependency}/deployments?environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
       },
       {
         html:

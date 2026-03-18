@@ -47,7 +47,7 @@ export async function fetchSearch(query) {
 export async function fetchUsage(query) {
   const baseUrl = config.get('cdpSbomExplorerUrl')
   const searchUrl = new URL('/usage', baseUrl)
-
+  console.log(query)
   if (query.type) {
     searchUrl.searchParams.set('type', query.type)
   }
