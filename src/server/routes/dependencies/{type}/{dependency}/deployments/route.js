@@ -5,11 +5,12 @@ export default async function (request) {
   const type = request.params.type
   const dependency = request.params.dependency
 
-  let results = []
-
-  if (request.query?.type && request.query?.dependency) {
-    results = await fetchSearch(request.query)
-  }
+  const results = await fetchSearch({
+    type,
+    dependency,
+    environment: 'prod',
+    ...request.query
+  })
 
   return {
     pageTitle: 'CDP Dependency Explorer - Dependency - Deployments',
@@ -25,6 +26,7 @@ export default async function (request) {
       {
         html: `<a href="/service/?deployments=${r.name}&environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/service/?service=${r.name}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>)`
       },
+      { text: '' },
       { text: '' }
     ])
   }
