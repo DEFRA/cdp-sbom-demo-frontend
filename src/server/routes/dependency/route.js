@@ -18,9 +18,13 @@ export default async function (request) {
     path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
-      { text: r.version },
-      { text: r.count },
-      { text: '0' }
+      {
+        html: `<a href="/dependency/?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
+      },
+      {
+        html: `<a href="/dependency/services?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${request.query.version}">${r.count}</a>`
+      },
+      { text: r.version === '9.6.0' ? '3' : '0' }
     ])
   }
 }

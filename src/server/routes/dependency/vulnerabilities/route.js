@@ -1,14 +1,5 @@
 import { fetchTypeFilter } from '#server/services/FilterService.js'
-
-const environments = [
-  '',
-  'latest',
-  'dev',
-  'test',
-  'perf-test',
-  'ext-test',
-  'prod'
-]
+import { environments } from '#server/common/constants/environments.js'
 
 export default async function (request) {
   const typeFilters = await fetchTypeFilter()

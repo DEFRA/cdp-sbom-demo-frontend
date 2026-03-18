@@ -1,15 +1,6 @@
 import { fetchSearch } from '#server/services/SearchService.js'
 import { fetchTypeFilter } from '#server/services/FilterService.js'
-
-const environments = [
-  '',
-  'latest',
-  'dev',
-  'test',
-  'perf-test',
-  'ext-test',
-  'prod'
-]
+import { environments } from '#server/common/constants/environments.js'
 
 export default async function (request) {
   const typeFilters = await fetchTypeFilter()
@@ -27,8 +18,12 @@ export default async function (request) {
     path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
-      { text: r.depversion },
-      { html: `<strong>${r.name}</strong>  (${r.version})` },
+      {
+        html: `<a href="/dependency/services?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.depversion}">${r.depversion}</a>`
+      },
+      {
+        html: `<a href="/service/?service=${r.name}&environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/service/?service=${r.name}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>)`
+      },
       { text: '' }
     ])
   }
