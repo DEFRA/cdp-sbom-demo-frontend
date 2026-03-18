@@ -3,8 +3,6 @@
 
 {% block pageContent %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column">
     {{ govukTable({
       firstCellIsHeader: false,
       classes: "govuk-table--small-text-until-tablet",
@@ -22,7 +20,5 @@
       rows: results
       })
     }}
-  </div>
-</div>
 
 {% endblock %}

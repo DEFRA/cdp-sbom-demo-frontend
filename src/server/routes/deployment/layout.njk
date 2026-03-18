@@ -14,8 +14,8 @@
 
 {% block content %}
   {{ appHeading({
-    text: 'Service',
-    caption: 'Browse by service'
+    text: 'Deployment',
+    caption: 'Browse by deployment'
   }) }}
 
       {% call appFilters({
@@ -25,25 +25,37 @@
         }
       }) %}
 
+      <div class="app-filters__item">
+        {{ govukSelect({
+          id: "environment",
+          name: "environment",
+          label: {
+            text: "Environment"
+          },
+          items: environments,
+          value: query.environment
+        }) }}
+      </div>
+
         <div class="app-filters__item">
           {{ appAutocomplete({
-            id: "service",
-            name: "service",
+            id: "artifact",
+            name: "artifact",
             classes: "app-autocomplete--medium app-autocomplete--inline",
             label: {
-              text: "Service Name"
+              text: "Deployment artifact"
             },
             icon: appSearchIcon(),
             formGroup: {
               classes: "app-form-group--inline"
             },
-            value: query.service,
+            value: query.artifact,
             dataFetcher: {
-              name: "searchServiceName",
-              loader: "search-service-loader"
+              name: "searchArtifactName",
+              loader: "search-artifact-loader"
             },
             loader: {
-              name: "search-service-loader"
+              name: "search-artifact-loader"
             },
             typeahead: true,
             placeholder: "Search for a service"
@@ -53,7 +65,7 @@
         <div class="app-filters__item">
           {{ govukInput({
             label: {
-              text: "Version"
+              text: "Version range"
             },
             id: "version",
             name: "version",
@@ -62,14 +74,13 @@
         </div>
 
         <div class="app-filters__item">
-          {{ govukSelect({
-            id: "environment",
-            name: "environment",
+          {{ govukInput({
             label: {
-              text: "Environment"
+              text: "Date range"
             },
-            items: environments,
-            value: query.environment
+            id: "date",
+            name: "date",
+            value: query.date
           }) }}
         </div>
 
@@ -79,9 +90,9 @@
       {% call appTabs({
         label: "Service views",
         tabs: [
-          { label: "Versions", url: "/service", isActive: path.endsWith('/service') },
-          { label: "Dependencies", url: "/service/dependencies", isActive: path.endsWith('/service/dependencies') },
-          { label: "Vulnerabilities", url: "/service/vulnerabilities", isActive: path.endsWith('/service/vulnerabilities') }
+          { label: "Summary", url: "/deployment", isActive: path.endsWith('/deployment') },
+          { label: "Dependencies", url: "/deployment/dependencies", isActive: path.endsWith('/deployment/dependencies') },
+          { label: "Vulnerabilities", url: "/deployment/vulnerabilities", isActive: path.endsWith('/deployment/vulnerabilities') }
         ]
       }) %}
       {% endcall %}

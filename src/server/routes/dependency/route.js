@@ -14,7 +14,7 @@ export default async function (request) {
   return {
     pageTitle: 'CDP Dependency Explorer - Dependency',
     environments: environments.map((e) => ({ value: e, text: e })),
-    query: { type: 'npm', environment: 'latest', ...request.query },
+    query: { type: 'npm', environment: 'prod', ...request.query },
     path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
@@ -22,9 +22,14 @@ export default async function (request) {
         html: `<a href="/dependency/?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
       },
       {
-        html: `<a href="/dependency/services?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${request.query.version}">${r.count}</a>`
+        html: `<a href="/dependency/services?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
       },
-      { text: r.version === '9.6.0' ? '3' : '0' }
+      {
+        html:
+          r.version === '10.3.0'
+            ? '<strong class="govuk-tag govuk-tag--red">Severe (3)</strong> <strong class="govuk-tag govuk-tag--yellow">Medium (2)</strong>'
+            : ''
+      }
     ])
   }
 }

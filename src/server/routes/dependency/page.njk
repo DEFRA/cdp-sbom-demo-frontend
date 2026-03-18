@@ -3,8 +3,7 @@
 
 {% block pageContent %}
 
-  <div class="govuk-grid-row">
-      <div class="govuk-grid-column">
+
         {{ govukTable({
           firstCellIsHeader: false,
           classes: "govuk-table--small-text-until-tablet",
@@ -13,16 +12,15 @@
               text: "Dependency version"
             },
             {
-              text: "Number of consuming services"
+              text: "Number of consuming deployments"
             },
             {
-              text: "Number of known vulnerabilities"
+              text: "Known vulnerabilities"
             }
           ],
           rows: results
           })
         }}
-      </div>
-    </div>
+
 
 {% endblock %}

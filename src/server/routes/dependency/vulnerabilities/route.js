@@ -7,7 +7,7 @@ export default async function (request) {
   return {
     pageTitle: 'CDP Dependency Explorer - Dependency - Vulnerabilities',
     environments: environments.map((e) => ({ value: e, text: e })),
-    query: { type: 'npm', environment: 'latest', ...request.query },
+    query: { type: 'npm', environment: 'prod', ...request.query },
     path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t }))
   }

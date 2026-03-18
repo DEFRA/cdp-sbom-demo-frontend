@@ -12,17 +12,17 @@ export default async function (request) {
   }
 
   return {
-    pageTitle: 'CDP Dependency Explorer - Dependency - Services',
+    pageTitle: 'CDP Dependency Explorer - Dependency - Deployments',
     environments: environments.map((e) => ({ value: e, text: e })),
-    query: { type: 'npm', environment: 'latest', ...request.query },
+    query: { type: 'npm', environment: 'prod', ...request.query },
     path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
       {
-        html: `<a href="/dependency/services?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.depversion}">${r.depversion}</a>`
+        html: `<a href="/dependency/deployments?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.depversion}">${r.depversion}</a>`
       },
       {
-        html: `<a href="/service/?service=${r.name}&environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/service/?service=${r.name}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>)`
+        html: `<a href="/service/?deployments=${r.name}&environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/service/?service=${r.name}&environment=${request.query.environment}&version=${r.version}">${r.version}</a>)`
       },
       { text: '' }
     ])

@@ -11,9 +11,9 @@ export function buildNavigation(request) {
       current: request?.path.startsWith('/dependency')
     },
     {
-      href: '/service',
-      text: 'Service',
-      current: request?.path.startsWith('/service')
+      href: '/deployment',
+      text: 'Deployment',
+      current: request?.path.startsWith('/deployment')
     },
     {
       href: '/vulnerability',
