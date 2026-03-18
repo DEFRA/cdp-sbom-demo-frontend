@@ -5,16 +5,16 @@ import { fetchUsage } from '#server/services/SearchService.js'
 export default async function (request) {
   const typeFilters = await fetchTypeFilter()
 
-  let results = []
-
-  if (request.query?.type && request.query?.dependency) {
-    results = await fetchUsage(request.query)
-  }
+  const results = await fetchUsage({
+    type: 'npm',
+    dependency: request.params.dependency,
+    ...request.query
+  })
 
   return {
     pageTitle: 'CDP Dependency Explorer - Dependency',
     environments: environments.map((e) => ({ value: e, text: e })),
-    query: { type: 'npm', environment: 'prod', ...request.query },
+    query: { environment: 'prod', ...request.query },
     path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [

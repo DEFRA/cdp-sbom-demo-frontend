@@ -6,19 +6,19 @@ export function buildNavigation(request) {
       current: request?.path === '/'
     },
     {
-      href: '/dependency',
-      text: 'Dependency',
-      current: request?.path.startsWith('/dependency')
+      href: '/dependencies',
+      text: 'Dependencies',
+      current: request?.path.startsWith('/dependencies')
     },
     {
-      href: '/deployment',
-      text: 'Deployment',
-      current: request?.path.startsWith('/deployment')
+      href: '/deployments',
+      text: 'Deployments',
+      current: request?.path.startsWith('/deployments')
     },
     {
-      href: '/vulnerability',
-      text: 'Vulnerability',
-      current: request?.path.startsWith('/vulnerability')
+      href: '/vulnerabilities',
+      text: 'Vulnerabilities',
+      current: request?.path.startsWith('/vulnerabilities')
     }
   ]
 }

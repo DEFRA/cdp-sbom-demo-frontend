@@ -1,0 +1,76 @@
+{% extends 'layouts/page.njk' %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% from "filters/macro.njk" import appFilters %}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+{% from "tabs/macro.njk" import appTabs %}
+
+{% from "icons/search-icon/macro.njk" import appSearchIcon %}
+{% from "icons/tick-icon/macro.njk" import appTickIcon %}
+
+{% block content %}
+  {{ appHeading({
+    text: 'Dependency',
+    caption: 'Browse by dependency'
+  }) }}
+
+      {% call appFilters({
+        action: "",
+        clear: {
+          url: ""
+        }
+      }) %}
+
+      <div class="app-filters__item">
+        {{ govukSelect({
+          id: "environment",
+          name: "environment",
+          label: {
+            text: "Environment"
+          },
+          items: environments,
+          value: query.environment
+        }) }}
+      </div>
+
+        <div class="app-filters__item">
+          {{ govukInput({
+            label: {
+              text: "Dependency version"
+            },
+            id: "version",
+            name: "version",
+            value: query.version
+          }) }}
+        </div>
+
+        <div class="app-filters__item">
+          {{ govukInput({
+            label: {
+              text: "Deployment dates"
+            },
+            id: "date",
+            name: "date",
+            value: query.date
+          }) }}
+        </div>
+
+    {% endcall %}
+
+    {% call appTabs({
+      label: "Service views",
+      tabs: [
+        { label: "Summary", url: "/dependency", isActive: path.endsWith('/dependency') },
+        { label: "Deployments", url: "/dependency/deployments", isActive: path.endsWith('/dependency/deployments') },
+        { label: "Vulnerabilities", url: "/dependency/vulnerabilities", isActive: path.endsWith('/dependency/vulnerabilities') }
+      ]
+    }) %}
+    {% endcall %}
+
+    {% block pageContent %}{% endblock %}
+
+{% endblock %}

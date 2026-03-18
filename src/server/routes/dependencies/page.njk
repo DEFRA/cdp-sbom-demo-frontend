@@ -1,0 +1,65 @@
+{% extends 'layouts/page.njk' %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% from "filters/macro.njk" import appFilters %}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+
+{% from "icons/search-icon/macro.njk" import appSearchIcon %}
+
+{% block content %}
+
+  {{ appHeading({
+    text: 'Dependencies',
+    caption: 'Search for dependencies'
+  }) }}
+
+  {% call appFilters({
+    action: "",
+    method: "POST",
+    clear: {
+      url: ""
+    }
+  }) %}
+
+    <div class="app-filters__item">
+      {{ govukSelect({
+        id: "type",
+        name: "type",
+        label: {
+          text: "Type"
+        },
+        items: typeFilters,
+        value: query.type
+      }) }}
+    </div>
+
+    <div class="app-filters__item">
+      {{ appAutocomplete({
+        id: "dependency",
+        name: "dependency",
+        classes: "app-autocomplete--medium app-autocomplete--inline",
+        label: {
+          text: "Dependency Name"
+        },
+        icon: appSearchIcon(),
+        formGroup: {
+          classes: "app-form-group--inline"
+        },
+        value: query.dependency,
+        dataFetcher: {
+          name: "searchDependencyName",
+          loader: "search-dependency-loader"
+        },
+        loader: {
+          name: "search-dependency-loader"
+        },
+        typeahead: true,
+        placeholder: "Search for a dependency"
+      }) }}
+    </div>
+
+{% endcall %}
+
+{% endblock %}
