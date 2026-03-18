@@ -13,6 +13,7 @@ import { Autocomplete } from '../../server/common/components/autocomplete/autoco
 import { AutocompleteAdvanced } from '../../server/common/components/autocomplete/autocomplete-advanced.js'
 import { AutocompleteSearch } from '../../server/common/components/autocomplete/autocomplete-search.js'
 import searchDependencyName from '../common/helpers/fetch/autocomplete/searchDependencyName.js'
+import { tabs } from '../../server/common/components/tabs/tabs.js'
 
 createAll(Button)
 createAll(Checkboxes)
@@ -26,10 +27,10 @@ window.cdp = window.cdp || {}
 
 window.cdp.searchDependencyName = searchDependencyName
 
-// Filters
 initModules('app-filters', filters)
 
-// Autocomplete
 initClass('app-autocomplete', Autocomplete)
 initClass('app-autocomplete-advanced', AutocompleteAdvanced)
 initClass('app-autocomplete-search', AutocompleteSearch)
+
+initModules('app-tabs', tabs)

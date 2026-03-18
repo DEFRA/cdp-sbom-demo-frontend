@@ -11,12 +11,8 @@ const environments = [
   'prod'
 ]
 
-let typeFilters = null
-
 export default async function (request) {
-  if (!typeFilters) {
-    typeFilters = await fetchTypeFilter()
-  }
+  const typeFilters = await fetchTypeFilter()
 
   let results = []
 
@@ -28,6 +24,7 @@ export default async function (request) {
     pageTitle: 'CDP Dependency Explorer - Dependency - Services',
     environments: environments.map((e) => ({ value: e, text: e })),
     query: { type: 'npm', environment: 'latest', ...request.query },
+    path: request.path,
     typeFilters: typeFilters.map((t) => ({ value: t, text: t })),
     results: results.map((r) => [
       { text: r.depversion },

@@ -87,16 +87,18 @@
 
     {% endcall %}
 
-    {% call appTabs({
-      label: "Service views",
-      tabs: [
-        { label: "Versions", url: "/dependency", isActive: true },
-        { label: "Services", url: "/dependency/services" },
-        { label: "Vulnerabilities", url: "/dependency/vulnerabilities" }
-      ]
-    }) %}
-    {% endcall %}
+    {% if query.dependency %}
+      {% call appTabs({
+        label: "Service views",
+        tabs: [
+          { label: "Versions", url: "/dependency", isActive: path.endsWith('/dependency') },
+          { label: "Services", url: "/dependency/services", isActive: path.endsWith('/dependency/services') },
+          { label: "Vulnerabilities", url: "/dependency/vulnerabilities", isActive: path.endsWith('/dependency/vulnerabilities') }
+        ]
+      }) %}
+      {% endcall %}
 
-  {% block pageContent %}{% endblock %}
+      {% block pageContent %}{% endblock %}
+    {% endif %}
 
 {% endblock %}
