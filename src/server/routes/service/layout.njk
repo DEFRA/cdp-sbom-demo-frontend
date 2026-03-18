@@ -14,8 +14,8 @@
 
 {% block content %}
   {{ appHeading({
-    text: 'Dependency',
-    caption: 'Browse by dependency'
+    text: 'Service',
+    caption: 'Browse by service'
   }) }}
 
       {% call appFilters({
@@ -26,39 +26,27 @@
       }) %}
 
         <div class="app-filters__item">
-          {{ govukSelect({
-            id: "type",
-            name: "type",
-            label: {
-              text: "Type"
-            },
-            items: typeFilters,
-            value: query.type
-          }) }}
-        </div>
-
-        <div class="app-filters__item">
           {{ appAutocomplete({
-            id: "dependency",
-            name: "dependency",
+            id: "service",
+            name: "service",
             classes: "app-autocomplete--medium app-autocomplete--inline",
             label: {
-              text: "Dependency Name"
+              text: "Service Name"
             },
             icon: appSearchIcon(),
             formGroup: {
               classes: "app-form-group--inline"
             },
-            value: query.dependency,
+            value: query.service,
             dataFetcher: {
-              name: "searchDependencyName",
-              loader: "search-dependency-loader"
+              name: "searchServiceName",
+              loader: "search-service-loader"
             },
             loader: {
-              name: "search-dependency-loader"
+              name: "search-service-loader"
             },
             typeahead: true,
-            placeholder: "Search for a dependency"
+            placeholder: "Search for a service"
           }) }}
         </div>
 
@@ -87,13 +75,13 @@
 
     {% endcall %}
 
-    {% if query.dependency %}
+    {% if query.service %}
       {% call appTabs({
         label: "Service views",
         tabs: [
-          { label: "Versions", url: "/dependency", isActive: path.endsWith('/dependency') },
-          { label: "Services", url: "/dependency/services", isActive: path.endsWith('/dependency/services') },
-          { label: "Vulnerabilities", url: "/dependency/vulnerabilities", isActive: path.endsWith('/dependency/vulnerabilities') }
+          { label: "Versions", url: "/service", isActive: path.endsWith('/service') },
+          { label: "Dependencies", url: "/service/dependencies", isActive: path.endsWith('/service/dependencies') },
+          { label: "Vulnerabilities", url: "/service/vulnerabilities", isActive: path.endsWith('/service/vulnerabilities') }
         ]
       }) %}
       {% endcall %}
