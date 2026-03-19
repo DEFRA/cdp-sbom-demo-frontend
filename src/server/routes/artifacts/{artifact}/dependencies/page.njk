@@ -1,4 +1,4 @@
-{% extends 'deployments/{artifact}/layout.njk' %}
+{% extends 'artifacts/{artifact}/layout.njk' %}
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
 {% block pageContent %}
@@ -11,10 +11,10 @@
               text: "Artifact version"
             },
             {
-              text: "Number of dependencies"
+              text: "Dependency (version)"
             },
             {
-              text: "Known vulnerabilities"
+              text: "Deployment dates"
             }
           ],
           rows: results

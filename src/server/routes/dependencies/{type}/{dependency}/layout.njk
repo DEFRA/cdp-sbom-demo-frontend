@@ -66,7 +66,7 @@
       label: "Dependency views",
       tabs: [
         { label: "Summary", url: "/dependencies/" + type + "/" + dependency | urlencode, isActive: path.endsWith(dependency | urlencode) },
-        { label: "Deployments", url: "/dependencies/" + type + "/" + dependency | urlencode + "/deployments", isActive: path.endsWith('/deployments') },
+        { label: "Artifacts", url: "/dependencies/" + type + "/" + dependency | urlencode + "/artifacts", isActive: path.endsWith('/artifacts') },
         { label: "Vulnerabilities", url: "/dependencies/" + type + "/" + dependency | urlencode + "/vulnerabilities", isActive: path.endsWith('/vulnerabilities') }
       ]
     }) %}

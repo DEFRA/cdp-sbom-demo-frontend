@@ -6,14 +6,14 @@ export function buildNavigation(request) {
       current: request?.path === '/'
     },
     {
+      href: '/artifacts',
+      text: 'Artifacts',
+      current: request?.path.startsWith('/artifacts')
+    },
+    {
       href: '/dependencies',
       text: 'Dependencies',
       current: request?.path.startsWith('/dependencies')
-    },
-    {
-      href: '/deployments',
-      text: 'Deployments',
-      current: request?.path.startsWith('/deployments')
     },
     {
       href: '/vulnerabilities',

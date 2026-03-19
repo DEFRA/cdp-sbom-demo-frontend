@@ -64,9 +64,9 @@
     {% call appTabs({
       label: "Deployment views",
       tabs: [
-        { label: "Summary", url: "/deployments/" + artifact, isActive: path.endsWith(artifact) },
-        { label: "Dependencies", url: "/deployments/" + artifact + "/dependencies", isActive: path.endsWith('/dependencies') },
-        { label: "Vulnerabilities", url: "/deployments/" + artifact + "/vulnerabilities", isActive: path.endsWith('/vulnerabilities') }
+        { label: "Summary", url: "/artifacts/" + artifact, isActive: path.endsWith(artifact) },
+        { label: "Dependencies", url: "/artifacts/" + artifact + "/dependencies", isActive: path.endsWith('/dependencies') },
+        { label: "Vulnerabilities", url: "/artifacts/" + artifact + "/vulnerabilities", isActive: path.endsWith('/vulnerabilities') }
       ]
     }) %}
     {% endcall %}

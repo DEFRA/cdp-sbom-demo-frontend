@@ -13,7 +13,7 @@ export default async function (request) {
   })
 
   return {
-    pageTitle: 'CDP Dependency Explorer - Dependency - Deployments',
+    pageTitle: 'CDP Dependency Explorer - Dependency - Artifacts',
     environments: environments.map((e) => ({ value: e, text: e })),
     query: { environment: 'prod', ...request.query },
     path: request.path,
@@ -24,7 +24,7 @@ export default async function (request) {
         html: `<a href="/dependency/deployments?type=${request.query.type}&dependency=${request.query.dependency}&environment=${request.query.environment}&version=${r.depversion}">${r.depversion}</a>`
       },
       {
-        html: `<a href="/deployments/${r.name}?environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/deployments/${r.name}?environment=${request.query.environment}&version=${r.version}">${r.version}</a>)`
+        html: `<a href="/artifacts/${r.name}?environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/deployments/${r.name}?environment=${request.query.environment}&version=${r.version}">${r.version}</a>)`
       },
       { text: '' }
     ])

@@ -2,7 +2,7 @@ import { environments } from '#server/common/constants/environments.js'
 
 export default async function (request) {
   return {
-    pageTitle: 'CDP Dependency Explorer - Deployments',
+    pageTitle: 'CDP Dependency Explorer - Artifacts',
     environments: environments.map((e) => ({ value: e, text: e })),
     query: { environment: 'prod', ...request.query }
   }
@@ -14,5 +14,5 @@ export async function POST(request, h) {
   // const redirectUrl = request.routeLookup('dependencies', {
   //   params: { dependency }
   // })
-  return h.redirect(`/deployments/${artifact}`)
+  return h.redirect(`/artifacts/${artifact}`)
 }
