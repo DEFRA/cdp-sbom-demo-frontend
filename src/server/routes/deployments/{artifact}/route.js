@@ -4,7 +4,11 @@ import { getEntity } from '#server/services/EntityService.js'
 export default async function (request) {
   const artifact = request.params.artifact
 
-  const results = await getEntity(artifact, request.query.version)
+  const results = await getEntity(
+    artifact,
+    request.query.version,
+    request.query.environment
+  )
 
   return {
     pageTitle: 'CDP Dependency Explorer - Deployments',
@@ -17,7 +21,7 @@ export default async function (request) {
         html: `<a href="/deployments/${artifact}?environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
       },
       {
-        html: `<a href="/deployments/${artifact}/dependencies?environment=${request.query.environment}&version=${request.query.version}">${r.count}</a>`
+        html: `<a href="/deployments/${artifact}/dependencies?environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
       },
       { text: '' }
     ])
