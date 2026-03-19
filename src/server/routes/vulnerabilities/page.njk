@@ -1,0 +1,53 @@
+{% extends 'layouts/page.njk' %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% from "filters/macro.njk" import appFilters %}
+{% from "autocomplete/macro.njk" import appAutocomplete %}
+
+{% from "icons/search-icon/macro.njk" import appSearchIcon %}
+
+{% block content %}
+
+  {{ appHeading({
+    text: 'Vulnerabilities',
+    caption: 'Search for vulnerabilities'
+  }) }}
+
+  {% call appFilters({
+    action: "",
+    method: "POST",
+    clear: {
+      url: ""
+    }
+  }) %}
+
+    <div class="app-filters__item">
+      {{ appAutocomplete({
+        id: "vulnerability",
+        name: "vulnerability",
+        classes: "app-autocomplete--medium app-autocomplete--inline",
+        label: {
+          text: "Vulnerability name"
+        },
+        icon: appSearchIcon(),
+        formGroup: {
+          classes: "app-form-group--inline"
+        },
+        value: query.vulnerability,
+        dataFetcher: {
+          name: "searchVulnerabilityName",
+          loader: "search-vulnerability-loader"
+        },
+        loader: {
+          name: "search-vulnerability-loader"
+        },
+        typeahead: true,
+        placeholder: "Search for a vulnerability"
+      }) }}
+    </div>
+
+{% endcall %}
+
+{% endblock %}

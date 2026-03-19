@@ -19,7 +19,7 @@ export default async function (request) {
       {
         html: `<a href="/deployments/${artifact}/dependencies?environment=${request.query.environment}&version=${request.query.version}">${r.count}</a>`
       },
-      { text: r.version === '10.3.0' ? '3' : '0' }
+      { text: '' }
     ])
   }
 }
