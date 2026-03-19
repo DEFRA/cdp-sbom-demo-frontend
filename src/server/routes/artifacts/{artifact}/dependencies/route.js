@@ -18,10 +18,10 @@ export default async function (request) {
     artifact,
     results: results.map((r) => [
       {
-        html: `<a href="/deployments/${artifact}/dependencies?environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
+        html: `<a href="/deployments/${artifact}/dependencies?version=${r.version}">${r.version}</a>`
       },
       {
-        html: `<a href="/dependencies/${r.type}/${encodeURIComponent(r.name)}?environment=${request.query.environment}&version="><strong>${r.name}</strong></a> (<a href="/dependencies/${r.type}/${r.name}?environment=${request.query.environment}&version=${r.depversion}">${r.depversion}</a>)`
+        html: `<a href="/dependencies/${r.type}/${encodeURIComponent(r.name)}?version="><strong>${r.name}</strong></a> (<a href="/dependencies/${r.type}/${r.name}?environment=${request.query.environment}&version=${r.depversion}">${r.depversion}</a>)`
       },
       { text: '' }
     ])

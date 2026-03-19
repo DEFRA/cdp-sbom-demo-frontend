@@ -21,10 +21,10 @@ export default async function (request) {
     path: request.path,
     results: results.map((r) => [
       {
-        html: `<a href="/dependencies/${type}/${dependency}?environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
+        html: `<a href="/dependencies/${type}/${dependency}?version=${r.version}">${r.version}</a>`
       },
       {
-        html: `<a href="/dependencies/${type}/${dependency}/artifacts?environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
+        html: `<a href="/dependencies/${type}/${dependency}/artifacts?version=${r.version}">${r.count}</a>`
       },
       {
         html:

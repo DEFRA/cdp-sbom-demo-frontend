@@ -25,7 +25,7 @@
         }
       }) %}
 
-      <div class="app-filters__item">
+      <!--<div class="app-filters__item">
         {{ govukSelect({
           id: "environment",
           name: "environment",
@@ -35,7 +35,7 @@
           items: environments,
           value: query.environment
         }) }}
-      </div>
+      </div>-->
 
         <div class="app-filters__item">
           {{ govukInput({
@@ -47,7 +47,7 @@
             value: query.version
           }) }}
         </div>
-
+<!--
         <div class="app-filters__item">
           {{ govukInput({
             label: {
@@ -58,7 +58,7 @@
             value: query.date,
             type: "date"
           }) }}
-        </div>
+        </div>-->
 
     {% endcall %}
 

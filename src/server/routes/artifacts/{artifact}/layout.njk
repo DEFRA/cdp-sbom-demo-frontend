@@ -24,7 +24,7 @@
         }
       }) %}
 
-      <div class="app-filters__item">
+      <!--<div class="app-filters__item">
         {{ govukSelect({
           id: "environment",
           name: "environment",
@@ -34,7 +34,7 @@
           items: environments,
           value: query.environment
         }) }}
-      </div>
+      </div>-->
 
         <div class="app-filters__item">
           {{ govukInput({
@@ -47,7 +47,7 @@
           }) }}
         </div>
 
-        <div class="app-filters__item">
+        <!--<div class="app-filters__item">
           {{ govukInput({
             label: {
               text: "Deployment dates"
@@ -57,7 +57,7 @@
             value: query.date,
             type: "date"
           }) }}
-        </div>
+        </div>-->
 
     {% endcall %}
 
@@ -66,6 +66,7 @@
       tabs: [
         { label: "Summary", url: "/artifacts/" + artifact, isActive: path.endsWith(artifact) },
         { label: "Dependencies", url: "/artifacts/" + artifact + "/dependencies", isActive: path.endsWith('/dependencies') },
+        { label: "Deployments", url: "/artifacts/" + artifact + "/deployments", isActive: path.endsWith('/deployments') },
         { label: "Vulnerabilities", url: "/artifacts/" + artifact + "/vulnerabilities", isActive: path.endsWith('/vulnerabilities') }
       ]
     }) %}
