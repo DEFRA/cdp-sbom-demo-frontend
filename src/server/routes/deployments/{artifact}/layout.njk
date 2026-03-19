@@ -13,10 +13,9 @@
 {% from "icons/tick-icon/macro.njk" import appTickIcon %}
 
 {% block content %}
-  {{ appHeading({
-    text: 'Deployment',
-    caption: 'Browse by deployment'
-  }) }}
+{{ appHeading({
+  text: artifact
+}) }}
 
       {% call appFilters({
         action: "",
@@ -38,31 +37,6 @@
       </div>
 
         <div class="app-filters__item">
-          {{ appAutocomplete({
-            id: "artifact",
-            name: "artifact",
-            classes: "app-autocomplete--medium app-autocomplete--inline",
-            label: {
-              text: "Deployment artifact"
-            },
-            icon: appSearchIcon(),
-            formGroup: {
-              classes: "app-form-group--inline"
-            },
-            value: query.artifact,
-            dataFetcher: {
-              name: "searchArtifactName",
-              loader: "search-artifact-loader"
-            },
-            loader: {
-              name: "search-artifact-loader"
-            },
-            typeahead: true,
-            placeholder: "Search for a service"
-          }) }}
-        </div>
-
-        <div class="app-filters__item">
           {{ govukInput({
             label: {
               text: "Version range"
@@ -80,24 +54,24 @@
             },
             id: "date",
             name: "date",
-            value: query.date
+            value: query.date,
+            type: "date"
           }) }}
         </div>
 
     {% endcall %}
 
-    {% if query.service %}
-      {% call appTabs({
-        label: "Service views",
-        tabs: [
-          { label: "Summary", url: "/deployment", isActive: path.endsWith('/deployment') },
-          { label: "Dependencies", url: "/deployment/dependencies", isActive: path.endsWith('/deployment/dependencies') },
-          { label: "Vulnerabilities", url: "/deployment/vulnerabilities", isActive: path.endsWith('/deployment/vulnerabilities') }
-        ]
-      }) %}
-      {% endcall %}
+    {% call appTabs({
+      label: "Deployment views",
+      tabs: [
+        { label: "Summary", url: "/deployments/" + artifact, isActive: path.endsWith(artifact) },
+        { label: "Dependencies", url: "/deployments/" + artifact + "/dependencies", isActive: path.endsWith('/dependencies') },
+        { label: "Vulnerabilities", url: "/deployments/" + artifact + "/vulnerabilities", isActive: path.endsWith('/vulnerabilities') }
+      ]
+    }) %}
+    {% endcall %}
 
-      {% block pageContent %}{% endblock %}
-    {% endif %}
+    {% block pageContent %}{% endblock %}
+
 
 {% endblock %}

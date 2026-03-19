@@ -24,7 +24,7 @@ export default async function (request) {
         html: `<a href="/dependencies/${type}/${dependency}?environment=${request.query.environment}&version=${r.version}">${r.version}</a>`
       },
       {
-        html: `<a href="/dependency/${type}/${dependency}/deployments?environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
+        html: `<a href="/dependencies/${type}/${dependency}/deployments?environment=${request.query.environment}&version=${r.version}">${r.count}</a>`
       },
       {
         html:
